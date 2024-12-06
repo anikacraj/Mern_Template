@@ -12,8 +12,8 @@ function UserHeader() {
             <Link to='/register'>Sign In </Link>
             <Link to='/product'>Products</Link>
         </li>
-     </ul>
-</header>
+        </ul>
+      </header>
         <Outlet />
     </div>
   )

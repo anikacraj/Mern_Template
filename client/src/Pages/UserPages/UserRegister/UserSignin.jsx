@@ -1,18 +1,17 @@
-
-import React, { useState } from "react";
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import './UserSignin.css'; // Import the CSS file
 
 
 function UserSignin() {
-     const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // Validation schema using Yup
     const validationSchema = Yup.object({
         name: Yup.string()
-            .min(10, 'Name must be at least 10 characters long')
+            .max(20, 'Name must be at most 20 characters long')
             .required('Name is required'),
         email: Yup.string()
             .email('Invalid email format')
@@ -29,17 +28,15 @@ function UserSignin() {
             email: '',
             password: '',
         },
-        validationSchema, // Attach validation schema
+        validationSchema,
         onSubmit: (values, { resetForm }) => {
             axios
                 .post("http://localhost:2004/register", values)
                 .then((result) => {
-                    const { status, message } = result.data;
-
+                    const { status } = result.data;
                     if (status === "again") {
                         alert("An account with this email already exists. Please login.");
                     } else if (status === "success") {
-                        console.log("Registration successful:", result.data);
                         localStorage.setItem(
                             "user",
                             JSON.stringify({
@@ -52,34 +49,36 @@ function UserSignin() {
                         resetForm();
                     }
                 })
-                .catch((err) => {
-                    console.error("Registration error:", err);
+                .catch(() => {
                     alert("Something went wrong. Please try again later.");
                 });
         },
     });
 
     return (
-        <div>
-            <div>
-                <div><img src="../../Media/red.png" alt="" /></div>
-                <h3>Sign In</h3>
-                <form onSubmit={formik.handleSubmit}>
-                    <div>
-                        <label htmlFor="name">Name: </label>
+        <div className="signin-container">
+            <div className="signin-card">
+                <div className="logo">
+                    <img src="../../Media/red.png" alt="Logo" />
+                </div>
+                <h3 className="signin-title">Sign Up</h3>
+                <form onSubmit={formik.handleSubmit} className="signin-form">
+                    <div className="form-group">
+                        <label htmlFor="name">Full Name</label>
                         <input
                             type="text"
                             name="name"
                             onChange={formik.handleChange}
                             value={formik.values.name}
+                            className={formik.errors.name && formik.touched.name ? 'error-input' : ''}
                         />
                         {formik.errors.name && formik.touched.name && (
-                            <div className="error">{formik.errors.name}</div>
+                            <div className="error-text">{formik.errors.name}</div>
                         )}
                     </div>
 
-                    <div>
-                        <label htmlFor="email">Email: </label>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
                         <input
                             type="email"
                             name="email"
@@ -87,28 +86,42 @@ function UserSignin() {
                                 formik.setFieldValue('email', e.target.value.toLowerCase());
                             }}
                             value={formik.values.email}
+                            className={formik.errors.email && formik.touched.email ? 'error-input' : ''}
                         />
                         {formik.errors.email && formik.touched.email && (
-                            <div className="error">{formik.errors.email}</div>
+                            <div className="error-text">{formik.errors.email}</div>
                         )}
                     </div>
 
-                    <div>
-                        <label htmlFor="password">Password: </label>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
                         <input
                             type="password"
                             name="password"
                             onChange={formik.handleChange}
                             value={formik.values.password}
+                            className={formik.errors.password && formik.touched.password ? 'error-input' : ''}
                         />
                         {formik.errors.password && formik.touched.password && (
-                            <div className="error">{formik.errors.password}</div>
+                            <div className="error-text">{formik.errors.password}</div>
                         )}
                     </div>
-                    <button type="submit">Sign Up</button>
+
+                    <button type="submit" className="submit-btn">Create Account</button>
                 </form>
-                <p>Already have an account?</p>
-                <Link className="link" to="/login">Login</Link>
+                <p className="signin-footer">
+                    Already registered? <Link className="link" to="/login">Login</Link>
+                </p>
+                <h6 className="mt-4 text-center font-weight-bold">
+                Or continue with social account
+              </h6>
+              <button className="loginWithGoogle">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJFOuaRWrmN_tJfIjNd6do_8sfaKh9IPNJ8Q&s"
+                  className="w-100"
+                  style={{ width: "150px", height: "auto" }}
+                />
+              </button>
             </div>
         </div>
     );
