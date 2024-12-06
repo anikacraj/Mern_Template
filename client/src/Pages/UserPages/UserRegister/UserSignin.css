@@ -1,0 +1,164 @@
+/* Container */
+.signin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #e63946, #335D92);
+    padding: 20px;
+}
+
+/* Card */
+.signin-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect */
+.signin-card:hover {
+    transform: translateY(-5px); /* Slightly moves the card up */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds a deeper shadow */
+    background:aqua;
+}
+
+/* Logo */
+.logo img {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+/* Title */
+.signin-title {
+    font-style: italic;
+    font-size: 32px; /* Increase size as needed */
+  font-weight: bold; /* Optional: Make it bold */
+  color: #333; /* Optional: Adjust the color */
+  margin-bottom: 20px; /* Optional: Add spacing below the heading */
+  text-align: center; /* Keep it centered */
+}
+
+/* Form */
+.signin-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.signin-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.signin-form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.signin-form input:focus {
+    border-color: #0056b3;
+}
+
+.error-input {
+    border-color: #e63946;
+}
+
+.error-text {
+    color: #e63946;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Button */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background: blueviolet !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+    transform: translateY(-3px); /* Slightly lifts the button */
+    border-color: #bbb; /* Darker border on hover */
+}
+
+/* Footer */
+.signin-footer {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.social-text {
+    margin: 15px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Social Icons */
+.social-icons img {
+    width: 40px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+/* Login Link */
+.link {
+    text-decoration: none;
+    color: #434547;
+    font-weight: 600;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* Hover Effect */
+.link:hover {
+    color: red; /* Darker shade for hover */
+    text-decoration: underline; /* Adds underline on hover */
+}
+
+/* Login with Google Button */
+.loginWithGoogle {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s;
+}
+
+.loginWithGoogle img {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Hover Effect for Google Button */
+.loginWithGoogle:hover {
+    box-shadow: 0 4px 8px orangered; /* Adds a subtle shadow */
+    transform: translateY(-3px); /* Slightly lifts the button */
+    background-color: #f1f1f1; /* Light gray background on hover */
+    border-color: #bbb; /* Darker border on hover */
+}

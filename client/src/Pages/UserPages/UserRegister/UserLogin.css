@@ -1,0 +1,237 @@
+/* Main container */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f4f8;
+    padding: 20px;
+  }
+  
+  /* Logo container */
+  .logo-container {
+    margin-bottom: 20px;
+    
+  }
+  
+  .logo {
+    width: 100px;
+    height: auto;
+  }
+  
+  /* Title styling */
+  .title-container {
+    margin-bottom: 10px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Form styling */
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    outline: none;
+  }
+  
+  .input:focus {
+    border-color: #0056b3;
+  }
+  
+  /* Button styling */
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #004099;
+  }
+  .login-section {
+    background-color: #007bff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .shape-bottom svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .login-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .btn-blue {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-blue:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-cancel {
+    color: #007bff;
+  }
+  
+  .google-btn-img {
+    width: 150px;
+    height: auto;
+  }
+  
+  .border-effect {
+    text-decoration: underline;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .border-effect:hover {
+    color: #0056b3;
+  }
+
+
+/* Card Styling */
+.login-box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-box:hover {
+  transform: translateY(-5px); /* Lifts the card slightly on hover */
+  box-shadow: 10px 12px 24px #ff4081;
+  background: burlywood; /* Subtle background color change */
+}
+
+/* Button Styling */
+.btn-blue {
+  background-color: #0056b3 !important;
+  color: #fff !important;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-blue:hover {
+  background-color: blueviolet !important; /* Darker blue on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+}
+
+.btn-cancel {
+  background-color: aqua !important;
+  color: #434547 !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-cancel:hover {
+  background-color: red !important;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+
+}
+
+/* "Sign Up" Link Hover Effect */
+.link {
+  color: #0056b3;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.link:hover {
+  color: #ff4081; /* Pinkish hover color */
+  text-decoration: underline;
+}
+
+/* Forget Password Link Styling */
+.txt {
+  color: #666;
+  font-size: 14px;
+  margin-top: 10px;
+  display: inline-block;
+}
+h2 {
+  font-style: italic;
+  font-size: 32px; /* Increase size as needed */
+  font-weight: bold; /* Optional: Make it bold */
+  color: #333; /* Optional: Adjust the color */
+  margin-bottom: 20px; /* Optional: Add spacing below the heading */
+  text-align: center; /* Keep it centered */
+}
+.txt:hover {
+  color: #0056b3; /* Matches primary link color */
+  text-decoration: underline;
+}
+  
+/* Button Container Spacing */
+.button-container {
+  display: flex;
+  justify-content: center; /* Centers the buttons horizontally */
+  gap: 20px; /* Adds space between the buttons */
+  margin-top: 20px; /* Optional: Adds spacing above the buttons */
+}
+
+.textfield-custom {
+  width: 100%; /* Makes the text field span the full container width */
+  max-width: 400px; /* Optional: Set a maximum width */
+  margin: 0 auto; /* Optional: Center the field horizontally */
+}
