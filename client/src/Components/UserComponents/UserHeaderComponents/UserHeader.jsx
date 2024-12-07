@@ -15,6 +15,11 @@ function UserHeader() {
     ]
   );
 
+  const handleLogOut = () => {
+    localStorage.clear();
+    
+    setUser(null);
+  };
 
   const [menuOpen,setMenuOpen] =useState(false);
 
@@ -57,7 +62,8 @@ function UserHeader() {
 <Link className='sm:flex items-center  mr-2 sm:mr-0' to='/cart' ><FaCartPlus className='ml-2 ' /> Cart</Link>
 {
   user ? 
-  <Link className='sm:flex items-center gap-2 ml-3 sm:ml-0'  to='/register'><MdAccountCircle className='ml-4'/> Log out </Link>
+  <Link  onClick={handleLogOut}  className='sm:flex items-center gap-2 ml-3 sm:ml-0' 
+  ><MdAccountCircle className='ml-4'/> Log out </Link>
 :
 <Link className='sm:flex items-center gap-2 '  to='/register'><MdAccountCircle className='ml-4'/> Sign In </Link>
 }
