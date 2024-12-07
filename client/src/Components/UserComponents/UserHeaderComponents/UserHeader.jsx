@@ -8,6 +8,14 @@ import { MdAccountCircle } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
 
 function UserHeader() {
+
+  const [user, setUser] = useState(
+    [
+      localStorage.getItem("role" =="user")
+    ]
+  );
+
+
   const [menuOpen,setMenuOpen] =useState(false);
 
   const handleMenu =()=>{
@@ -25,10 +33,19 @@ function UserHeader() {
 
   return (
     <div>
+
+<div className='sm:hidden md:hidden xl:hidden mt-5 ml-6'>
+  <button onClick={handleMenu} >
+   {
+    menuOpen ?  <FaTimes />:  <CiMenuFries className='w-5 h-5 text-black ' />
+   }
+  </button>
+</div>
+
    <header className=' w-3.01/4 xl:px-28 xl:ml-20 px-4 sm:ml-8 mx-auto '>
     <nav className='flex justify-between items-center mx-auto md:py-4 pt-6 pb-3 '>
 
-    <IoSearch className='text-black w-5 h-5 cursor-pointer '/>
+    <IoSearch className='text-black sm:w-9 sm:h-9 w-6 h-6 cursor-pointer '/>
 
     <Link to="/"
     > <MdOutlineScreenSearchDesktop 
@@ -36,18 +53,18 @@ function UserHeader() {
     Logo</Link>
   
 
-<div className='text-lg text-black sm:flex items-center gap-4 hidden'>
-<Link className='flex items-center gap-2 ' to='/cart' ><FaCartPlus /> Cart</Link>
-<Link className='flex items-center gap-2 '  to='/register'><MdAccountCircle /> Sign In </Link>
+<div className='text-lg text-black flex items-center sm:gap-4 gap-0  '>
+<Link className='sm:flex items-center  mr-2 sm:mr-0' to='/cart' ><FaCartPlus className='ml-2 ' /> Cart</Link>
+{
+  user ? 
+  <Link className='sm:flex items-center gap-2 ml-3 sm:ml-0'  to='/register'><MdAccountCircle className='ml-4'/> Log out </Link>
+:
+<Link className='sm:flex items-center gap-2 '  to='/register'><MdAccountCircle className='ml-4'/> Sign In </Link>
+}
+
 </div>
 
-<div className='sm:hidden md:hidden xl:hidden'>
-  <button onClick={handleMenu} >
-   {
-    menuOpen ?  <FaTimes />:  <CiMenuFries className='w-5 h-5 text-black ' />
-   }
-  </button>
-</div>
+
 
 </nav>
 <hr />
@@ -65,16 +82,26 @@ function UserHeader() {
 </div>
 
 <div>
-<ul className={`bg-black text-white px-4 py-2 rounded-sm ${menuOpen ? '' :'hidden'}`}>
-    {
-      navItems.map(({title,path})=>(
-        <li key={title} className='hover:text-orange-500 font-semibold my-3  cursor-pointer '>
-          <Link className=' text-align: right' to={path}>{title}</Link>
-        </li>
-      ))
-    }
+  <ul
+    className={`bg-black text-white fixed top-10 left-0 h-2/4 w-64 px-4 py-2 rounded-lg  transition-transform ease-in-out duration-500 transform ${
+      menuOpen ? 'translate-x-0' : '-translate-x-full'
+    }`}
+  >
+    {navItems.map(({ title, path }) => (
+      <li
+        key={title}
+        className="hover:text-orange-500 font-semibold my-3 cursor-pointer"
+      >
+        <Link className="text-right" to={path}>
+          {title}
+        </Link>
+      </li>
+    ))}
   </ul>
 </div>
+
+
+
  
    </header>
         <Outlet />
