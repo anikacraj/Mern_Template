@@ -1,6 +1,6 @@
 
 const { use } = require("../app");
-const userModel =require("../Models/user.model")
+const userModel =require('../Models/userRegister')
 
 
 const bcrypt = require('bcrypt');
@@ -112,5 +112,5 @@ const getAllUsers =async (req, res) => {
 
 
 
-module.exports = {getAllUsers , getOneUser ,UserLogin ,RegisterUser, updatedUser,deleteUser};
+module.exports = {getAllUsers,UserLogin ,RegisterUser};
 

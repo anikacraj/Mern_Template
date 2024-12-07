@@ -4,12 +4,9 @@ const port = config.app.port ;
 
 
 
-// Import User Model
-const usersRegisterModal = require("./Models/userRegister");
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+
+
 
 
 app.listen(port,(req,res)=>{

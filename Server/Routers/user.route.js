@@ -9,6 +9,6 @@ router.get("/", getAllUsers);
 router.post('/register',RegisterUser);
 router.post('/login',UserLogin);
 // router.patch('/:id',updatedUser);
-router.delete('/:id',deleteUser);
+// router.delete('/:id',deleteUser);
 
 module.exports = router;
