@@ -14,12 +14,12 @@ function UserLogin() {
     axios
       .post("http://localhost:2008/login", { email, password })
       .then((result) => {
-        const { status, role, message } = result.data;
+        const {userId, status, role, message } = result.data;
         if (status === "success") {
           localStorage.setItem("isAuthenticated", "true");
           localStorage.setItem(
             "user",
-            JSON.stringify({ email, loginDate: new Date().toISOString() })
+            JSON.stringify({userId, email, loginDate: new Date().toISOString() })
           );
           navigate("/"); // Redirect to the homepage
         } else {

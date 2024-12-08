@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
   // Slider settings
+  const { userId } = useParams();
   const sliderSettings = {
     dots: true,
     infinite: true,

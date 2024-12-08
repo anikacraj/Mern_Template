@@ -12,59 +12,30 @@ import UserHeader from './Components/UserComponents/UserHeaderComponents/UserHea
 import UserSignin from './Pages/UserPages/UserRegister/UserSignin.jsx'
 import UserLogin from './Pages/UserPages/UserRegister/UserLogin.jsx'
 import NewMeeting from './Pages/UserPages/NewMeeting/NewMeeting.jsx'
+import GuestMeeting from './Pages/GuestMeeting/GuestMeeting.jsx'
 
 
-const router =createBrowserRouter([
-{
-  path: '/',
-  element: <UserHeader />,
-  children:[
-    { path:'/',
-      element: <Home />
-    },
-    { path:'contact',
-    element: <UserContactPage />
-  },
+const router = createBrowserRouter([
   {
-    path:'product',
-    element:<UserProductsPage />
+      path: '/',
+      element: <UserHeader />,
+      children: [
+          { path: '/', element: <Home /> },
+          { path: 'contact', element: <UserContactPage /> },
+          { path: 'product', element: <UserProductsPage /> },
+          { path: 'register', element: <UserSignin /> },
+          { path: 'login', element: <UserLogin /> },
+          { path: ':userId', element: <Home /> }, // Dynamic user route
+      ],
   },
-  {
-    path:'register',
-    element:<UserSignin />
-  },
-  {
-    path:'login',
-    element:<UserLogin />
-  }
-  ,
-  
-
-  ]
-  
-},
-
-{
-  path:'newMeeting',
-  element:<NewMeeting />
-},
-
-{
-  path:'/about',
-  element:<UserAboutPage />
-}
-,{
-  path:'*',
-  element:<NoFoundPage />
-}
-
-])
-
-
-
+  { path: 'newMeeting', element: <NewMeeting /> },
+  { path: '/about', element: <UserAboutPage /> },
+  { path: '/guestMeeting', element: <GuestMeeting /> },
+  { path: '*', element: <NoFoundPage /> },
+]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-   <RouterProvider router={router} />
-  </StrictMode>,
-)
+      <RouterProvider router={router} />
+  </StrictMode>
+);

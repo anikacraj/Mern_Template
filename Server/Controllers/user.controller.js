@@ -35,27 +35,34 @@ const RegisterUser = async (req,res)=>{
     }
 
     const UserLogin = async (req, res) => {
-        const { email, password } = req.body;
-      
-        try {
+      const { email, password } = req.body;
+  
+      try {
           const user = await usersRegisterModal.findOne({ email });
           if (!user) {
-            return res.json({ status: "error", message: "User not found." });
+              return res.json({ status: "error", message: "User not found." });
           }
-      
-          // Compare entered password with the hashed password in the database
+  
           const match = await bcrypt.compare(password, user.password);
           if (match) {
-            return res.json({ status: "success", role: "user" });
+              return res.json({
+                  status: "success",
+                  role: "user",
+                  userId: user._id, 
+                  name: user.name, // Include the name
+                  email: user.email, // Include the email
+                  message: "Login successful",
+              });
           } else {
-            return res.json({ status: "error", message: "Incorrect password." });
+              return res.json({ status: "error", message: "Incorrect password." });
           }
-        } catch (err) {
+      } catch (err) {
           console.error("Login error:", err);
           res.status(500).json({ status: "error", message: "Internal server error." });
-        }
-      };
-
+      }
+  };
+  
+  
 
 
 
