@@ -4,6 +4,7 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import "./UserLogin.css";
+
 function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,14 +15,15 @@ function UserLogin() {
     axios
       .post("http://localhost:2008/login", { email, password })
       .then((result) => {
-        const {userId, status, role, message } = result.data;
+        const { userId, status, role, message } = result.data;
         if (status === "success") {
           localStorage.setItem("isAuthenticated", "true");
           localStorage.setItem(
             "user",
-            JSON.stringify({userId, email, loginDate: new Date().toISOString() })
+            JSON.stringify({ userId, email, loginDate: new Date().toISOString() })
           );
-          navigate("/"); // Redirect to the homepage
+          navigate(`/${userId}`);
+          location.reload(); // Corrected this line to navigate using userId
         } else {
           alert(message || "Login failed. Please try again.");
         }
@@ -91,7 +93,7 @@ function UserLogin() {
           </div>
           <p className="txt">
             Not Registered?{" "}
-            <Link className="link" to="/register" >
+            <Link className="link" to="/register">
               Sign Up
             </Link>
           </p>

@@ -6,14 +6,14 @@ import { MdOutlineScreenSearchDesktop, MdAccountCircle } from "react-icons/md";
 import { Button } from '@mui/material';
 
 function UserHeader() {
-  const [user, setUser] = useState([localStorage.getItem("role") === "user"]);
+  const user = JSON.parse(localStorage.getItem("user")); // Get user data from localStorage
+  const userId = user ? user.userId : null; // Extract userId if available
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogOut = () => {
     localStorage.clear();
-    setUser(null);
+    window.location.reload(); // Refresh the page to clear the user's state
   };
-
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenu = () => {
     setMenuOpen((prevState) => !prevState);
@@ -45,42 +45,43 @@ function UserHeader() {
 
           {/* Buttons: Get Started and Login/Logout */}
           <div className="text-lg text-black flex items-center sm:gap-4 gap-0">
-  {/* Show + New Meeting button only if user is logged in */}
-  {user && (
-    <Button className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 hover:text-white transition-all duration-300">
-      <Link className="sm:flex items-center mr-2 sm:mr-0" to="/newMeeting">
-        + New Meeting
-      </Link>
-    </Button>
-  )}
-  
-{
-  !user && (
-    <Button className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 hover:text-white transition-all duration-300">
-    <Link className="sm:flex items-center mr-2 sm:mr-0" to="/register">
-      GET STARTED
-    </Link>
-  </Button>
-  )
-}
-  {user ? (
-    <Button className="p-2 bg-red-600 text-white rounded-md hover:bg-red-500 hover:text-white transition-all duration-300">
-      <Link
-        onClick={handleLogOut}
-        className="sm:flex items-center gap-2 ml-3 sm:ml-0"
-      >
-        <MdAccountCircle className="ml-4" /> Log out
-      </Link>
-    </Button>
-  ) : (
-    <Button className="p-2 bg-green-600 text-white rounded-md hover:bg-green-500 hover:text-black transition-all duration-300">
-      <Link className="sm:flex items-center gap-2" to="/login">
-        <MdAccountCircle className="ml-4" /> Log In
-      </Link>
-    </Button>
-  )}
-</div>
+            {/* Show + New Meeting button only if user is logged in */}
+            {userId && (
+              <Button className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 hover:text-white transition-all duration-300">
+                <Link
+                  className="sm:flex items-center mr-2 sm:mr-0"
+                  to={`/${userId}/newMeeting`}
+                >
+                  New Meeting
+                </Link>
+              </Button>
+            )}
 
+            {!userId && (
+              <Button className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 hover:text-white transition-all duration-300">
+                <Link className="sm:flex items-center mr-2 sm:mr-0" to="/register">
+                  GET STARTED
+                </Link>
+              </Button>
+            )}
+
+            {userId ? (
+              <Button className="p-2 bg-red-600 text-white rounded-md hover:bg-red-500 hover:text-white transition-all duration-300">
+                <Link
+                  onClick={handleLogOut}
+                  className="sm:flex items-center gap-2 ml-3 sm:ml-0"
+                >
+                  <MdAccountCircle className="ml-4" /> Log out
+                </Link>
+              </Button>
+            ) : (
+              <Button className="p-2 bg-green-600 text-white rounded-md hover:bg-green-500 hover:text-black transition-all duration-300">
+                <Link className="sm:flex items-center gap-2" to="/login">
+                  <MdAccountCircle className="ml-4" /> Log In
+                </Link>
+              </Button>
+            )}
+          </div>
         </nav>
         <hr />
 

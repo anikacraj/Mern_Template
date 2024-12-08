@@ -1,24 +1,8 @@
-// models/Meeting.js
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const ScheduleSchema = new mongoose.Schema({
-  from: {
-    type: String,
-    required: true,
-  },
-  to: {
-    type: String,
-    required: true,
-  },
-});
-
-const MeetingSchema = new mongoose.Schema({
-  day: {
-    type: String,
-    required: true,
-  },
-  schedules: {
-    type: [ScheduleSchema],
+const meetingSchema = new mongoose.Schema({
+  weeklySchedule: {
+    type: Object,
     required: true,
   },
   timeZone: {
@@ -29,10 +13,11 @@ const MeetingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,  // ObjectId type for the user reference
+    ref: 'User',  // Reference to User model
+    required: true,  // Make userId required
   },
-});
+}, { timestamps: true });
 
-module.exports = mongoose.model("Meeting", MeetingSchema);
+module.exports = mongoose.model('Meeting', meetingSchema);

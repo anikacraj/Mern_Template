@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React,{useState, useEffect} from 'react';
+import useFetch from '../UserPages/useFetch';
 import {
   format,
   addMonths,
@@ -12,12 +13,15 @@ import {
   addDays,
 } from "date-fns";
 
+
+
 const GuestMeeting = () => {
   const today = new Date(); // Today's date
   const currentYear = today.getFullYear();
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(new Date(currentYear, 11, 1)); // Start from December
-
+  const {data,isLoading,error} = useFetch("http://localhost:2008/newMeeting"); 
+  console.log(data)
   // Example times available for all dates
   const timesAvailable = ["12:00am", "12:30am", "1:00am", "2:00am", "2:30am", "3:00am"];
 

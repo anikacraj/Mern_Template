@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { createBrowserRouter,RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import './index.css'
 import Home from './Pages/UserPages/Home.jsx'
@@ -13,29 +13,32 @@ import UserSignin from './Pages/UserPages/UserRegister/UserSignin.jsx'
 import UserLogin from './Pages/UserPages/UserRegister/UserLogin.jsx'
 import NewMeeting from './Pages/UserPages/NewMeeting/NewMeeting.jsx'
 import GuestMeeting from './Pages/GuestMeeting/GuestMeeting.jsx'
-
+import Hostdashboard from './Pages/Hostdashboard.jsx'
 
 const router = createBrowserRouter([
   {
-      path: '/',
-      element: <UserHeader />,
-      children: [
-          { path: '/', element: <Home /> },
-          { path: 'contact', element: <UserContactPage /> },
-          { path: 'product', element: <UserProductsPage /> },
-          { path: 'register', element: <UserSignin /> },
-          { path: 'login', element: <UserLogin /> },
-          { path: ':userId', element: <Home /> }, // Dynamic user route
-      ],
+    path: '/',
+    element: <UserHeader />,
+    children: [
+      { path: '/', element: <Home /> },
+      // Home page with dynamic userId route
+      { path: '/:userId', element: <Home /> },
+      { path: 'contact', element: <UserContactPage /> },
+      { path: 'product', element: <UserProductsPage /> },
+      { path: 'register', element: <UserSignin /> },
+      { path: 'login', element: <UserLogin /> },
+    ],
   },
-  { path: 'newMeeting', element: <NewMeeting /> },
+  { path: '/:userId/newMeeting', element: <NewMeeting /> },
+  { path: '/:userId/hostdashboard', element: <Hostdashboard /> },
   { path: '/about', element: <UserAboutPage /> },
   { path: '/guestMeeting', element: <GuestMeeting /> },
-  { path: '*', element: <NoFoundPage /> },
+
+  { path: '*', element: <NoFoundPage /> }, // Wildcard for 404
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </StrictMode>
 );
