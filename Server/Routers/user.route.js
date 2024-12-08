@@ -7,6 +7,7 @@ const { getAllUsers,UserLogin, RegisterUser, getOneUser, updatedUser, deleteUser
 router.get("/", getAllUsers);
 // router.get("/:id", getOneUser);
 router.post('/register',RegisterUser);
+
 router.post('/login',UserLogin);
 // router.patch('/:id',updatedUser);
 // router.delete('/:id',deleteUser);

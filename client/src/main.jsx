@@ -11,6 +11,7 @@ import NoFoundPage from './Pages/NoFoundPage.jsx'
 import UserHeader from './Components/UserComponents/UserHeaderComponents/UserHeader.jsx'
 import UserSignin from './Pages/UserPages/UserRegister/UserSignin.jsx'
 import UserLogin from './Pages/UserPages/UserRegister/UserLogin.jsx'
+import NewMeeting from './Pages/UserPages/NewMeeting/NewMeeting.jsx'
 
 
 const router =createBrowserRouter([
@@ -36,12 +37,17 @@ const router =createBrowserRouter([
     path:'login',
     element:<UserLogin />
   }
+  ,
+  
 
   ]
   
 },
 
-
+{
+  path:'newMeeting',
+  element:<NewMeeting />
+},
 
 {
   path:'/about',

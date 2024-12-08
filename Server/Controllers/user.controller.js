@@ -1,6 +1,6 @@
 
 const { use } = require("../app");
-const userModel =require('../Models/userRegister')
+const usersRegisterModal =require('../Models/userRegister')
 
 
 const bcrypt = require('bcrypt');

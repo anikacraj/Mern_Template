@@ -59,7 +59,7 @@ const Footer = () => {
           {/* Newsletter */}
           <div className="w-full md:w-1/4">
             <h4 className="text-md font-semibold text-gray-400 uppercase mb-3">
-              Newsletter
+              Contact Us
             </h4>
             <form className="flex flex-col">
               <input
