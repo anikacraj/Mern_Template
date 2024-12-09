@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import useFetch from './UserPages/useFetch';
 
 function Hostdashboard() {
-  // Retrieve userId from localStorage
   const user = JSON.parse(localStorage.getItem('user'));
-  const userId = user?.userId; // Safely access userId
+  const userId = user?.userId;
 
   if (!userId) {
     return (
@@ -15,46 +14,47 @@ function Hostdashboard() {
   }
 
   const { data, isLoading, error } = useFetch(`http://localhost:2008/${userId}/newMeeting`);
+  const [activeMenu, setActiveMenu] = useState(null);
+  const dropdownRef = useRef(null);
+
+  const handleEdit = (id) => {
+    console.log('Edit clicked for:', id);
+    // Add your edit logic here
+  };
+
+  const handleDelete = (id) => {
+    console.log('Delete clicked for:', id);
+    // Add your delete logic here
+  };
+
+  const toggleMenu = (id) => {
+    setActiveMenu(activeMenu === id ? null : id); // Toggle the menu
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setActiveMenu(null); // Close menu if click outside
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   if (isLoading) return <div className="text-center py-4 text-blue-500">Loading...</div>;
   if (error) return <div className="text-center py-4 text-red-500">Error: {error.message}</div>;
 
-  const handleEdit = (meetingId) => {
-    console.log('Edit meeting with ID:', meetingId);
-    // Implement edit functionality here (e.g., redirect to edit form or open modal)
-  };
-
-  const handleDelete = (meetingId) => {
-    console.log('Delete meeting with ID:', meetingId);
-    // Implement delete functionality here (e.g., make API call to delete the meeting)
-  };
-
   return (
     <div className="container mx-auto p-4">
       {data.length > 0 ? (
-        data.map(meeting => {
+        data.map((meeting) => {
           const scheduleData = meeting.weeklySchedule || { [meeting.day]: meeting.schedules };
 
           return (
-            <div key={meeting._id} className="bg-white shadow-md rounded-lg p-6 mb-4 relative">
-              {/* Triple dot button for options */}
-              <div className="absolute top-2 right-2 group">
-                <button className="text-gray-600 hover:text-gray-900">
-                  <span className="text-xl">...</span>
-                </button>
-                {/* Menu appears on hover */}
-                <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-md opacity-0 group-hover:opacity-100 group-hover:block hidden transition-opacity">
-                  <ul className="text-sm text-gray-700">
-                    <li onClick={() => handleEdit(meeting._id)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                      Edit
-                    </li>
-                    <li onClick={() => handleDelete(meeting._id)} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                      Delete
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
+            <div key={meeting._id} className="relative bg-white shadow-md rounded-lg p-6 mb-4">
               <h2 className="text-2xl font-bold text-gray-700 text-center mb-4">Meeting Schedule</h2>
               <p className="text-gray-600 mb-2">
                 <span className="font-semibold">Time Zone:</span> {meeting.timeZone}
@@ -87,6 +87,35 @@ function Hostdashboard() {
                     </div>
                   );
                 })}
+              </div>
+              <div className="absolute top-2 right-2">
+                <button
+                  className="text-gray-600 hover:text-gray-900 focus:outline-none"
+                  onClick={() => toggleMenu(meeting._id)}
+                >
+                  <span className="text-xl">...</span>
+                </button>
+                {activeMenu === meeting._id && (
+                  <div
+                    ref={dropdownRef}
+                    className="absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded-lg shadow-md"
+                  >
+                    <ul className="text-sm text-gray-700">
+                      <li
+                        onClick={() => handleEdit(meeting._id)}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      >
+                        Edit
+                      </li>
+                      <li
+                        onClick={() => handleDelete(meeting._id)}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      >
+                        Delete
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
               <div className="mt-4 text-gray-500 text-sm">
                 Created At: {new Date(meeting.createdAt).toLocaleString()}
